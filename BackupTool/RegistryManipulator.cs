@@ -15,7 +15,7 @@ namespace DCSBackupTool
                 sk1.SetValue(KeyName.ToUpper(), Value);   // Save the value
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -39,7 +39,7 @@ namespace DCSBackupTool
                     // If the RegistryKey exists I get its value or null is returned.
                     return (string)sk1.GetValue(KeyName.ToUpper());
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return null;
                 }

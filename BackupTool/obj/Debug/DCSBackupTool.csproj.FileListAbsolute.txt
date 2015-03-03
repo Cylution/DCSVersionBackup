@@ -12,3 +12,6 @@ C:\Users\admin\Documents\GitHub\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupT
 C:\Users\admin\Documents\GitHub\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.g.resources
 C:\Users\admin\Documents\GitHub\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.exe
 C:\Users\admin\Documents\GitHub\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.pdb
+E:\GIT\DCSVersionBackup\BackupTool\bin\Debug\DCSBackupTool.exe.config
+E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.exe
+E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.pdb
