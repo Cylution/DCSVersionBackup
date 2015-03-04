@@ -2,10 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Backup DCS" Height="269.417" Width="416.045" 
-        Icon="Images\Fighter-Jet.ico" 
+        Icon="..\Images\Fighter-Jet.ico" 
         ResizeMode="NoResize">
     <Window.Background>
-        <ImageBrush ImageSource="Images\A10.jpg"></ImageBrush>
+        <ImageBrush ImageSource="..\Images\A10.jpg"></ImageBrush>
     </Window.Background>
 
     <Grid Height="237" VerticalAlignment="Top" Margin="0,0,2,-1">

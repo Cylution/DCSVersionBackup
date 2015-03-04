@@ -6,6 +6,7 @@ using System.Windows.Documents;
 using System.Threading;
 using System.IO;
 using Microsoft.Win32;
+using DCSBackupTool.Model;
 
 namespace DCSBackupTool
 {

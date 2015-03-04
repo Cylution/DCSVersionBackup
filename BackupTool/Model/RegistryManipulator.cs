@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Win32;
 
-namespace DCSBackupTool
+namespace DCSBackupTool.Model
 {
     class RegistryManipulator
     {
