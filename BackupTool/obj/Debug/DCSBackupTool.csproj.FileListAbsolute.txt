@@ -26,3 +26,4 @@ E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.Properties.Resources.
 E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.csproj.GenerateResource.Cache
 E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\View\Settings.baml
 E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\View\Settings.g.cs
+E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.csprojResolveAssemblyReference.cache
