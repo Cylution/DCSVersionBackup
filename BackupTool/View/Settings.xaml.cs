@@ -3,6 +3,7 @@ using System.Windows;
 using Microsoft.Win32;
 using DCSBackupTool.Model;
 
+
 namespace DCSBackupTool
 {
     public partial class Settings : Window
@@ -110,7 +111,6 @@ namespace DCSBackupTool
 
         private string GetPathFromUser()
         {
-            //using System.Windows.Forms;
             string folderPath = "";
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();

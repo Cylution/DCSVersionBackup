@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\CustomBoolEventArgs.cs" />
     <Compile Include="Model\CustomStringEventArgs.cs" />
     <Compile Include="Model\FolderCopier.cs" />
     <Compile Include="Model\RegistryManipulator.cs" />

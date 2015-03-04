@@ -11,7 +11,8 @@ namespace DCSBackupTool.ViewModel
     class Toolbox : INotifyPropertyChanged
     {
         #region fields
-        private string text;
+        private string text = "Choose options above";
+        private bool progress = false;
         #endregion
 
         #region properties
@@ -26,16 +27,39 @@ namespace DCSBackupTool.ViewModel
                 OnPropertyChanged("CopyOutText");
             }
         }
+
+        public bool Progress
+        {
+            get { return this.progress; }
+            set
+            {
+                if (value == this.progress)
+                    return;
+                this.progress = value;
+                OnPropertyChanged("Progress");
+            }
+        }
         #endregion
 
-        #region event handler methods
-        void HandleChangeStateTextEvent(object sender, CustomStringEventArgs e)
+        public void Backup()
         {
-            //bind & update the text on the UI
+            FolderCopier myCopier = new FolderCopier();
+            myCopier.RaiseCopyEvent += HandleCopyTextEvent;
+            myCopier.RaiseProgressEvent += HandleProgressEvent;
+            myCopier.BackupDCS();
+        }
+
+
+        #region event handler methods
+        void HandleCopyTextEvent(object sender, CustomStringEventArgs e)
+        {
             CopyOutText = e.Message;
         }
 
-      
+        void HandleProgressEvent(object sender, CustomBoolEventArgs e)
+        {
+            Progress = e.BoolBack;
+        }
         #endregion
 
         #region OnPropertyChanged for our UI bindings

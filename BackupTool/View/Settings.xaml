@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 Title="Settings" Height="269.417" Width="416.045" ResizeMode="NoResize">
     <Window.Background>
-        <ImageBrush ImageSource="Images\A10.jpg"></ImageBrush>
+        <ImageBrush ImageSource="..\Images\A10.jpg"></ImageBrush>
     </Window.Background>
     <Grid>
         <Grid HorizontalAlignment="Left" Height="216" Margin="10,10,0,0" VerticalAlignment="Top" Width="390">
@@ -38,23 +38,23 @@
 
             <Button x:Name="BackupLocation_Button" Grid.Column="2" Margin="15,26,0,170"  Height="20" Width="20" 
                     RenderTransformOrigin="0.55,2.2" ToolTip="Select Backup Folder" Click="BackupLocation_Button_Click">
-                <Image Source="images\folder.png"></Image>
+                <Image Source="..\images\folder.png"></Image>
             </Button>
             <Button x:Name="SavedGames_Button" Grid.Column="2" Margin="15,51,0,145"  Height="20" Width="20" 
                     RenderTransformOrigin="0.55,2.2" ToolTip="Select Saved Games Folder" Click="SavedGames_Click">
-                <Image Source="Images/folder.png"/>
+                <Image Source="..\Images/folder.png"/>
             </Button>
             <Button x:Name="DCSWorld_Button" Grid.Column="2" Margin="15,76,0,120"  Height="20" Width="20" 
                     RenderTransformOrigin="0.55,2.2"  ToolTip="Select DCS World Folder" Click="DCSWorld_Click">
-                <Image Source="Images/folder.png"/>
+                <Image Source="..\Images/folder.png"/>
             </Button>
             <Button x:Name="Helios_Button" Grid.Column="2" Margin="15,101,0,95"  Height="20" Width="20" 
                     RenderTransformOrigin="0.55,2.2" ToolTip="Select Helios Folder" Click="Helios_Click">
-                <Image Source="Images/folder.png"/>
+                <Image Source="..\Images/folder.png"/>
             </Button>
             <Button x:Name="Jsgme_Button" Grid.Column="2" Margin="15,126,0,70"  Height="20" 
                     RenderTransformOrigin="0.55,2.2" ToolTip="Select Jsgme Folder" Click="Jsgme_Click">
-                <Image Source="Images/folder.png"/>
+                <Image Source="..\Images/folder.png"/>
             </Button>
         </Grid>
     </Grid>

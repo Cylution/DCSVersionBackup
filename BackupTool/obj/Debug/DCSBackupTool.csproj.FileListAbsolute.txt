@@ -17,13 +17,12 @@ E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.exe
 E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.pdb
 E:\GIT\DCSVersionBackup\BackupTool\bin\Debug\DCSBackupTool.exe
 E:\GIT\DCSVersionBackup\BackupTool\bin\Debug\DCSBackupTool.pdb
-E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.csprojResolveAssemblyReference.cache
 E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\View\MainWindow.baml
-E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\Settings.baml
 E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\View\MainWindow.g.cs
-E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\Settings.g.cs
 E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\App.g.cs
 E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool_MarkupCompile.cache
 E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.g.resources
 E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.Properties.Resources.resources
 E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\DCSBackupTool.csproj.GenerateResource.Cache
+E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\View\Settings.baml
+E:\GIT\DCSVersionBackup\BackupTool\obj\Debug\View\Settings.g.cs
