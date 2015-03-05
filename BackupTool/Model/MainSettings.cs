@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Windows;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Win32;
-using DCSBackupTool.Model;
-using DCSBackupTool.ViewModel;
 
-namespace DCSBackupTool
+namespace DCSBackupTool.Model
 {
-    public partial class Settings : Window
+    class MainSettings
     {
         private RegistryKey baseRegistryKey = Registry.CurrentUser;
         private string dCSBackupToolSubKey = "SOFTWARE\\DCSBackupTool\\Settings";
@@ -18,9 +19,8 @@ namespace DCSBackupTool
         private string usersHeliosPath;
         private string usersJsgmePath;
 
-        public Settings()
+        public MainSettings()
         {
-            InitializeComponent();
             GetSettingsValues();
         }
 
@@ -30,11 +30,11 @@ namespace DCSBackupTool
             this.usersBackupPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "BackupPath");
             if (this.usersBackupPath == null)
             {
-                BackupLocationText.Text = "Select a backup location";
+                BackupLocationText("Select a backup location");
             }
             else
             {
-                BackupLocationText.Text = this.usersBackupPath;
+                BackupLocationText(this.usersBackupPath);
             }
 
             //get saved games
@@ -44,11 +44,11 @@ namespace DCSBackupTool
                 this.usersHomePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
                 string dcsSavedGames = this.usersHomePath + "\\Saved Games\\DCS";
                 this.usersSavedGames = dcsSavedGames;
-                savedGamesText.Text = dcsSavedGames;
+                SavedGamesText(dcsSavedGames);
             }
             else
             {
-                savedGamesText.Text = this.usersSavedGames;
+                SavedGamesText(this.usersSavedGames);
             }
 
             //get dcsWorld location my setting first if in registry
@@ -60,11 +60,11 @@ namespace DCSBackupTool
             }
             if (this.usersDCSworldPath != null)
             {
-                DCSWorldText.Text = this.usersDCSworldPath;
+                DCSWorldText(this.usersDCSworldPath);
             }
             else
             {
-                DCSWorldText.Text = "Can not find DCS. Enter path to DCS";
+                DCSWorldText("Can not find DCS. Enter path to DCS");
             }
 
             //get helios path
@@ -72,22 +72,22 @@ namespace DCSBackupTool
             if (this.usersHeliosPath == null)
             {
                 //usual helios path
-                HeliosText.Text = "If installed choose location";
-                HeliosText.ToolTip = "Usual path is " + this.usersHomePath + "\\Documents\\Helios";
+                HeliosText("If installed choose location");
+                HeliosText("Usual path is " + this.usersHomePath + "\\Documents\\Helios");
             }
             else
             { 
-                HeliosText.Text = this.usersHeliosPath;
+                HeliosText(this.usersHeliosPath);
             }
             //get jsgme path
             this.usersJsgmePath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "Jsgme");
             if (this.usersJsgmePath == null)
             {
-                JsgmeText.ToolTip = "Select path for JSGME folder if your using one";
+                JsgmeText("Select path for JSGME folder if your using one");
             }
             else 
             {
-                JsgmeText.Text = this.usersJsgmePath;
+                JsgmeText(this.usersJsgmePath);
             }
         }
 
@@ -159,9 +159,55 @@ namespace DCSBackupTool
             this.Close();
         }
 
-        private void CloseSettings_Click(object sender, RoutedEventArgs e)
+
+        #region Raise our events when required
+        public void SetSettingsText(string text)
         {
-            this.Close();
+            OnRaiseSettingsEvent(new CustomStringEventArgs(text));
         }
+
+        public void BackupLocationText(string text)
+        {
+            OnRaiseSettingsEvent(new CustomStringEventArgs(text));
+        }
+
+        public void SavedGamesText(string text)
+        {
+            OnRaiseSettingsEvent(new CustomStringEventArgs(text));
+        }
+
+        public void DCSWorldText(string text)
+        {
+            OnRaiseSettingsEvent(new CustomStringEventArgs(text));
+        }
+
+        public void HeliosText(string text)
+        {
+            OnRaiseSettingsEvent(new CustomStringEventArgs(text));
+        }
+
+        public void JsgmeText(string text)
+        {
+            OnRaiseSettingsEvent(new CustomStringEventArgs(text));
+        }
+
+
+        #endregion
+
+        #region events to publish
+        // Declare my event using EventHandler<T> 
+        public event EventHandler<CustomStringEventArgs> RaiseSettingsEvent;
+        //event is raised to send text back to UI
+        protected virtual void OnRaiseSettingsEvent(CustomStringEventArgs e)
+        {
+            EventHandler<CustomStringEventArgs> handler = RaiseSettingsEvent;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+        #endregion
+
+
     }
 }

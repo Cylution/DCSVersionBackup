@@ -61,6 +61,7 @@
     <Compile Include="Model\CustomBoolEventArgs.cs" />
     <Compile Include="Model\CustomStringEventArgs.cs" />
     <Compile Include="Model\FolderCopier.cs" />
+    <Compile Include="Model\MainSettings.cs" />
     <Compile Include="Model\RegistryManipulator.cs" />
     <Compile Include="ViewModel\Toolbox.cs" />
     <Compile Include="View\Settings.xaml.cs">
