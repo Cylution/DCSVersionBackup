@@ -91,21 +91,21 @@ namespace DCSBackupTool.Model
             }
         }
 
-        private void BackupLocation_Button_Click(object sender, RoutedEventArgs e)
+        private void BackupLocation_Button_Click()
         {
             this.usersBackupPath = GetPathFromUser();
             if(this.usersBackupPath != "")
             { 
-                BackupLocationText.Text = this.usersBackupPath;
+                BackupLocationText(this.usersBackupPath);
             }
         }
 
-        private void Helios_Click(object sender, RoutedEventArgs e)
+        private void Helios_Click()
         {
             this.usersHeliosPath = GetPathFromUser();
             if (this.usersHeliosPath != "")
             {
-                HeliosText.Text = this.usersHeliosPath;
+                HeliosText(this.usersHeliosPath);
             }
         }
 
@@ -122,82 +122,82 @@ namespace DCSBackupTool.Model
             return folderPath;
         }
 
-        private void SavedGames_Click(object sender, RoutedEventArgs e)
+        private void SavedGames_Click()
         {
             this.usersSavedGames = GetPathFromUser();
             if (this.usersSavedGames != "")
             {
-                savedGamesText.Text = this.usersSavedGames;
+                SavedGamesText(this.usersSavedGames);
             }
         }
 
-        private void DCSWorld_Click(object sender, RoutedEventArgs e)
+        private void DCSWorld_Click()
         {
             this.usersDCSworldPath = GetPathFromUser();
             if (this.usersDCSworldPath != "")
             {
-                DCSWorldText.Text = this.usersDCSworldPath;
+                DCSWorldText(this.usersDCSworldPath);
             }
         }
 
-        private void Jsgme_Click(object sender, RoutedEventArgs e)
+        private void Jsgme_Click()
         {
             this.usersJsgmePath = GetPathFromUser();
             if (this.usersJsgmePath != "")
             {
-                JsgmeText.Text = this.usersJsgmePath;
+                JsgmeText(this.usersJsgmePath);
             }
         }
 
-        private void Set_Click(object sender, RoutedEventArgs e)
+        private void Set_Click()
         {
             RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "BackupPath", this.usersBackupPath);
             RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "SavedGames", this.usersSavedGames);
             RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "DCS World", this.usersDCSworldPath);
             RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "Helios", this.usersHeliosPath);
             RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "Jsgme", this.usersJsgmePath);
-            this.Close();
+            //send back to close the window now
+
+
         }
 
 
         #region Raise our events when required
         public void SetSettingsText(string text)
         {
-            OnRaiseSettingsEvent(new CustomStringEventArgs(text));
+            OnRaiseSetSettingsEvent(new CustomStringEventArgs(text));
         }
 
         public void BackupLocationText(string text)
         {
-            OnRaiseSettingsEvent(new CustomStringEventArgs(text));
+            OnRaiseBackupLocationSettingsEvent(new CustomStringEventArgs(text));
         }
 
         public void SavedGamesText(string text)
         {
-            OnRaiseSettingsEvent(new CustomStringEventArgs(text));
+            OnRaiseSavedGamesSettingsEvent(new CustomStringEventArgs(text));
         }
 
         public void DCSWorldText(string text)
         {
-            OnRaiseSettingsEvent(new CustomStringEventArgs(text));
+            OnRaiseDCSWorldSettingsEvent(new CustomStringEventArgs(text));
         }
 
         public void HeliosText(string text)
         {
-            OnRaiseSettingsEvent(new CustomStringEventArgs(text));
+            OnRaiseHeliosSettingsEvent(new CustomStringEventArgs(text));
         }
 
         public void JsgmeText(string text)
         {
-            OnRaiseSettingsEvent(new CustomStringEventArgs(text));
+            OnRaiseJsgmeSettingsEvent(new CustomStringEventArgs(text));
         }
 
 
         #endregion
 
         #region events to publish
-        // Declare my event using EventHandler<T> 
         public event EventHandler<CustomStringEventArgs> RaiseSettingsEvent;
-        //event is raised to send text back to UI
         protected virtual void OnRaiseSettingsEvent(CustomStringEventArgs e)
         {
             EventHandler<CustomStringEventArgs> handler = RaiseSettingsEvent;
@@ -206,6 +206,67 @@ namespace DCSBackupTool.Model
                 handler(this, e);
             }
         }
+
+        public event EventHandler<CustomStringEventArgs> RaiseJsgmeSettingsEvent;
+        protected virtual void OnRaiseJsgmeSettingsEvent(CustomStringEventArgs e)
+        {
+            EventHandler<CustomStringEventArgs> handler = RaiseJsgmeSettingsEvent;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<CustomStringEventArgs> RaiseSetSettingsEvent;
+        protected virtual void OnRaiseSetSettingsEvent(CustomStringEventArgs e)
+        {
+            EventHandler<CustomStringEventArgs> handler = RaiseSetSettingsEvent;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<CustomStringEventArgs> RaiseBackupLocationSettingsEvent;
+        protected virtual void OnRaiseBackupLocationSettingsEvent(CustomStringEventArgs e)
+        {
+            EventHandler<CustomStringEventArgs> handler = RaiseBackupLocationSettingsEvent;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<CustomStringEventArgs> RaiseSavedGamesSettingsEvent;
+        protected virtual void OnRaiseSavedGamesSettingsEvent(CustomStringEventArgs e)
+        {
+            EventHandler<CustomStringEventArgs> handler = RaiseSavedGamesSettingsEvent;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<CustomStringEventArgs> RaiseDCSWorldSettingsEvent;
+        protected virtual void OnRaiseDCSWorldSettingsEvent(CustomStringEventArgs e)
+        {
+            EventHandler<CustomStringEventArgs> handler = RaiseDCSWorldSettingsEvent;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<CustomStringEventArgs> RaiseHeliosSettingsEvent;
+        protected virtual void OnRaiseHeliosSettingsEvent(CustomStringEventArgs e)
+        {
+            EventHandler<CustomStringEventArgs> handler = RaiseHeliosSettingsEvent;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
         #endregion
 
 
