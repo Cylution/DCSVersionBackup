@@ -146,9 +146,8 @@ namespace DCSBackupTool.Model
         #endregion
 
         #region events to publish
-        // Declare my event using EventHandler<T> 
         public event EventHandler<CustomStringEventArgs> RaiseCopyEvent;
-        //event is raised to send text back to UI
+
         protected virtual void OnRaiseCopyEvent(CustomStringEventArgs e)
         {
             EventHandler<CustomStringEventArgs> handler = RaiseCopyEvent;
@@ -158,9 +157,8 @@ namespace DCSBackupTool.Model
             }
         }
 
-        // Declare my event using EventHandler<T> 
         public event EventHandler<CustomBoolEventArgs> RaiseProgressEvent;
-        //event is raised to send text back to UI
+
         protected virtual void OnRaiseProgressEvent(CustomBoolEventArgs e)
         {
             EventHandler<CustomBoolEventArgs> handler = RaiseProgressEvent;

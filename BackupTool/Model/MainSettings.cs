@@ -24,7 +24,7 @@ namespace DCSBackupTool.Model
             GetSettingsValues();
         }
 
-        private void GetSettingsValues()
+        public void GetSettingsValues()
         {
             //get backup location
             this.usersBackupPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "BackupPath");
