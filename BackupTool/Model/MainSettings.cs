@@ -1,4 +1,19 @@
-﻿using System;
+﻿//  Copyright 2015 Simon Collier
+//    
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +41,6 @@ namespace DCSBackupTool.Model
 
         public void GetSettingsValues()
         {
-            //get backup location
             this.usersBackupPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "BackupPath");
             if (this.usersBackupPath == null)
             {
@@ -37,7 +51,6 @@ namespace DCSBackupTool.Model
                 BackupLocationText(this.usersBackupPath);
             }
 
-            //get saved games
             this.usersSavedGames = RegistryManipulator.ReadRegistry(baseRegistryKey, dCSBackupToolSubKey, "SavedGames");
             if (this.usersSavedGames == null)
             {
@@ -51,7 +64,6 @@ namespace DCSBackupTool.Model
                 SavedGamesText(this.usersSavedGames);
             }
 
-            //get dcsWorld location my setting first if in registry
             this.usersDCSworldPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "DCS World");
             if (this.usersDCSworldPath == null)
             {
@@ -67,7 +79,6 @@ namespace DCSBackupTool.Model
                 DCSWorldText("Can not find DCS. Enter path to DCS");
             }
 
-            //get helios path
             this.usersHeliosPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "Helios");
             if (this.usersHeliosPath == null)
             {
@@ -79,7 +90,7 @@ namespace DCSBackupTool.Model
             { 
                 HeliosText(this.usersHeliosPath);
             }
-            //get jsgme path
+
             this.usersJsgmePath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "Jsgme");
             if (this.usersJsgmePath == null)
             {
@@ -90,77 +101,6 @@ namespace DCSBackupTool.Model
                 JsgmeText(this.usersJsgmePath);
             }
         }
-
-        private void BackupLocation_Button_Click()
-        {
-            this.usersBackupPath = GetPathFromUser();
-            if(this.usersBackupPath != "")
-            { 
-                BackupLocationText(this.usersBackupPath);
-            }
-        }
-
-        private void Helios_Click()
-        {
-            this.usersHeliosPath = GetPathFromUser();
-            if (this.usersHeliosPath != "")
-            {
-                HeliosText(this.usersHeliosPath);
-            }
-        }
-
-        private string GetPathFromUser()
-        {
-            string folderPath = "";
-            var dialog = new System.Windows.Forms.FolderBrowserDialog();
-            System.Windows.Forms.DialogResult result = dialog.ShowDialog();
-
-            if (result.ToString() == "OK")
-            {
-                folderPath = dialog.SelectedPath;
-            }
-            return folderPath;
-        }
-
-        private void SavedGames_Click()
-        {
-            this.usersSavedGames = GetPathFromUser();
-            if (this.usersSavedGames != "")
-            {
-                SavedGamesText(this.usersSavedGames);
-            }
-        }
-
-        private void DCSWorld_Click()
-        {
-            this.usersDCSworldPath = GetPathFromUser();
-            if (this.usersDCSworldPath != "")
-            {
-                DCSWorldText(this.usersDCSworldPath);
-            }
-        }
-
-        private void Jsgme_Click()
-        {
-            this.usersJsgmePath = GetPathFromUser();
-            if (this.usersJsgmePath != "")
-            {
-                JsgmeText(this.usersJsgmePath);
-            }
-        }
-
-        private void Set_Click()
-        {
-            RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "BackupPath", this.usersBackupPath);
-            RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "SavedGames", this.usersSavedGames);
-            RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "DCS World", this.usersDCSworldPath);
-            RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "Helios", this.usersHeliosPath);
-            RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "Jsgme", this.usersJsgmePath);
-            //send back to close the window now
-
-
-        }
-
 
         #region Raise our events when required
         public void SetSettingsText(string text)
