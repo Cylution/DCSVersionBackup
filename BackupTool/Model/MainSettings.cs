@@ -208,7 +208,5 @@ namespace DCSBackupTool.Model
         }
 
         #endregion
-
-
     }
 }

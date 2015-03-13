@@ -187,8 +187,5 @@ namespace DCSBackupTool.ViewModel
             }
         }
         #endregion
-
-
-
     }
 }

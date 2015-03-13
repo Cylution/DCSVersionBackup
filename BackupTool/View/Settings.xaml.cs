@@ -25,9 +25,9 @@ namespace DCSBackupTool
         private Toolbox myViewModel;
         private RegistryKey baseRegistryKey = Registry.CurrentUser;
         private string dCSBackupToolSubKey = "SOFTWARE\\DCSBackupTool\\Settings";
-        private string eDPathSubKey = "SOFTWARE\\Eagle Dynamics\\DCS World";
+       // private string eDPathSubKey = "SOFTWARE\\Eagle Dynamics\\DCS World";
         private string usersBackupPath;
-        private string usersHomePath;
+        //private string usersHomePath;
         private string usersSavedGames;
         private string usersDCSworldPath;
         private string usersHeliosPath;

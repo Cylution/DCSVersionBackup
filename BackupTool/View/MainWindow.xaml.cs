@@ -34,8 +34,7 @@ namespace DCSBackupTool
         {
             InitializeComponent();
             myViewModel = new Toolbox();
-            this.DataContext = myViewModel;
-            
+            this.DataContext = myViewModel;          
         }
 
         private void Backup_Click(object sender, RoutedEventArgs e)
@@ -53,6 +52,5 @@ namespace DCSBackupTool
             Settings mySet = new Settings();
             mySet.Show();
         }
-
     }
 }
