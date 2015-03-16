@@ -27,7 +27,6 @@ namespace DCSBackupTool.Model
 {
     class FolderCopier
     {
-        private string dCSBackupToolSubKey = "SOFTWARE\\DCSBackupTool\\Settings";
         private RegistryKey baseRegistryKey = Registry.CurrentUser;
 
         public void BackupDCS()
@@ -48,7 +47,7 @@ namespace DCSBackupTool.Model
             try
             {
                 string backupPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey,
-                        this.dCSBackupToolSubKey, "BackupPath");
+                        MainSettings.dCSBackupToolSubKey, "BackupPath");
 
                 if (!Directory.Exists(backupPath))
                 {
@@ -57,10 +56,10 @@ namespace DCSBackupTool.Model
                 }
 
                 List<string> foldersToBackup = new List<string>();
-                foldersToBackup.Add(RegistryManipulator.ReadRegistry(baseRegistryKey, dCSBackupToolSubKey, "SavedGames"));
-                foldersToBackup.Add(RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "DCS World"));
-                foldersToBackup.Add(RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "Helios"));
-                foldersToBackup.Add(RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "Jsgme"));
+                foldersToBackup.Add(RegistryManipulator.ReadRegistry(baseRegistryKey, MainSettings.dCSBackupToolSubKey, "SavedGames"));
+                foldersToBackup.Add(RegistryManipulator.ReadRegistry(this.baseRegistryKey, MainSettings.dCSBackupToolSubKey, "DCS World"));
+                foldersToBackup.Add(RegistryManipulator.ReadRegistry(this.baseRegistryKey, MainSettings.dCSBackupToolSubKey, "Helios"));
+                foldersToBackup.Add(RegistryManipulator.ReadRegistry(this.baseRegistryKey, MainSettings.dCSBackupToolSubKey, "Jsgme"));
 
                 foreach (string fol in foldersToBackup)
                 {

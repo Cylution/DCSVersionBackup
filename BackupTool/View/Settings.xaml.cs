@@ -24,10 +24,7 @@ namespace DCSBackupTool
     {
         private Toolbox myViewModel;
         private RegistryKey baseRegistryKey = Registry.CurrentUser;
-        private string dCSBackupToolSubKey = "SOFTWARE\\DCSBackupTool\\Settings";
-       // private string eDPathSubKey = "SOFTWARE\\Eagle Dynamics\\DCS World";
         private string usersBackupPath;
-        //private string usersHomePath;
         private string usersSavedGames;
         private string usersDCSworldPath;
         private string usersHeliosPath;
@@ -88,11 +85,11 @@ namespace DCSBackupTool
 
         private void Set_Click(object sender, RoutedEventArgs e)
         {
-            RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "BackupPath", this.usersBackupPath);
-            RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "SavedGames", this.usersSavedGames);
-            RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "DCS World", this.usersDCSworldPath);
-            RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "Helios", this.usersHeliosPath);
-            RegistryManipulator.WriteRegistry(baseRegistryKey, dCSBackupToolSubKey, "Jsgme", this.usersJsgmePath);
+            RegistryManipulator.WriteRegistry(baseRegistryKey, MainSettings.dCSBackupToolSubKey, "BackupPath", this.usersBackupPath);
+            RegistryManipulator.WriteRegistry(baseRegistryKey, MainSettings.dCSBackupToolSubKey, "SavedGames", this.usersSavedGames);
+            RegistryManipulator.WriteRegistry(baseRegistryKey, MainSettings.dCSBackupToolSubKey, "DCS World", this.usersDCSworldPath);
+            RegistryManipulator.WriteRegistry(baseRegistryKey, MainSettings.dCSBackupToolSubKey, "Helios", this.usersHeliosPath);
+            RegistryManipulator.WriteRegistry(baseRegistryKey, MainSettings.dCSBackupToolSubKey, "Jsgme", this.usersJsgmePath);
             this.Close();
         }
 

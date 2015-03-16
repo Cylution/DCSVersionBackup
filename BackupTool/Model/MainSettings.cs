@@ -25,7 +25,7 @@ namespace DCSBackupTool.Model
     class MainSettings
     {
         private RegistryKey baseRegistryKey = Registry.CurrentUser;
-        private string dCSBackupToolSubKey = "SOFTWARE\\DCSBackupTool\\Settings";
+        public static string dCSBackupToolSubKey = "SOFTWARE\\DCSBackupTool\\Settings";
         private string eDPathSubKey = "SOFTWARE\\Eagle Dynamics\\DCS World";
         private string usersBackupPath;
         private string usersHomePath;
@@ -41,7 +41,7 @@ namespace DCSBackupTool.Model
  
         public void GetSettingsValues()
         {
-            this.usersBackupPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "BackupPath");
+            this.usersBackupPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, MainSettings.dCSBackupToolSubKey, "BackupPath");
             if (this.usersBackupPath == null)
             {
                 BackupLocationText("Select a backup location");
@@ -64,7 +64,7 @@ namespace DCSBackupTool.Model
                 SavedGamesText(this.usersSavedGames);
             }
 
-            this.usersDCSworldPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "DCS World");
+            this.usersDCSworldPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, MainSettings.dCSBackupToolSubKey, "DCS World");
             if (this.usersDCSworldPath == null)
             {
                 //get eagle dynamics setting
@@ -79,7 +79,7 @@ namespace DCSBackupTool.Model
                 DCSWorldText("Can not find DCS. Enter path to DCS");
             }
 
-            this.usersHeliosPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "Helios");
+            this.usersHeliosPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, MainSettings.dCSBackupToolSubKey, "Helios");
             if (this.usersHeliosPath == null)
             {
                 //usual helios path
@@ -91,7 +91,7 @@ namespace DCSBackupTool.Model
                 HeliosText(this.usersHeliosPath);
             }
 
-            this.usersJsgmePath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "Jsgme");
+            this.usersJsgmePath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, MainSettings.dCSBackupToolSubKey, "Jsgme");
             if (this.usersJsgmePath == null)
             {
                 JsgmeText("Select path for JSGME folder if your using one");
