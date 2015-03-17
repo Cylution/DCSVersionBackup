@@ -31,12 +31,6 @@ namespace DCSBackupTool.Model
 
         public void BackupDCS()
         {
-            Thread trd = new Thread(new ThreadStart(ThreadBackupFolders));
-            trd.IsBackground = true;
-            trd.Start();
-        }
-        private void ThreadBackupFolders()
-        {
             //start time
             string backupLocations = null;
             int result = Environment.TickCount & Int32.MaxValue;

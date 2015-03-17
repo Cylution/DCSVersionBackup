@@ -22,6 +22,7 @@ namespace DCSBackupTool
 {
     public partial class Settings : Window
     {
+        #region fields
         private Toolbox myViewModel;
         private RegistryKey baseRegistryKey = Registry.CurrentUser;
         private string usersBackupPath;
@@ -29,7 +30,9 @@ namespace DCSBackupTool
         private string usersDCSworldPath;
         private string usersHeliosPath;
         private string usersJsgmePath;
+        #endregion
 
+        #region constructor
         public Settings()
         {
             InitializeComponent();
@@ -37,7 +40,9 @@ namespace DCSBackupTool
             myViewModel.PopulateSettings();
             this.DataContext = myViewModel;
         }
+        #endregion
 
+        #region buttons
         private void BackupLocation_Button_Click(object sender, RoutedEventArgs e)
         {
             this.usersBackupPath = GetPathFromUser();
@@ -97,7 +102,9 @@ namespace DCSBackupTool
         {
             this.Close();
         }
+        #endregion
 
+        #region Helper methods
         private string GetPathFromUser()
         {
             string folderPath = "";
@@ -110,5 +117,6 @@ namespace DCSBackupTool
             }
             return folderPath;
         }
+        #endregion
     }
 }

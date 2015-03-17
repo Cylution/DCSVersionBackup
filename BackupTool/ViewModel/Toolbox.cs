@@ -136,7 +136,8 @@ namespace DCSBackupTool.ViewModel
             FolderCopier myCopier = new FolderCopier();
             myCopier.RaiseCopyEvent += HandleCopyTextEvent;
             myCopier.RaiseProgressEvent += HandleProgressEvent;
-            myCopier.BackupDCS();
+
+            new Task(() => { myCopier.BackupDCS(); }).Start();
         }
 
         #region event handler methods
