@@ -46,7 +46,7 @@ namespace DCSBackupTool.Model
                 if (!Directory.Exists(backupPath))
                 {
                     SetProgressBar(false);
-                    throw new ApplicationException("Backup location " + backupPath + " does not exist");
+                    throw new ApplicationException("Backup location " + backupPath + " not found");
                 }
 
                 List<string> foldersToBackup = new List<string>();
