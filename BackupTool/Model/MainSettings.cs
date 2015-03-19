@@ -67,7 +67,6 @@ namespace DCSBackupTool.Model
             this.usersDCSworldPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, MainSettings.dCSBackupToolSubKey, "DCS World");
             if (this.usersDCSworldPath == null)
             {
-                //get eagle dynamics setting
                 this.usersDCSworldPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.eDPathSubKey, "Path");
             }
             if (this.usersDCSworldPath != null)
