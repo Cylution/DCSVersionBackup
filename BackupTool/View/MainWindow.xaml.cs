@@ -28,15 +28,20 @@ namespace DCSBackupTool
 {
     public partial class MainWindow : Window
     {
+        #region fields
         private Toolbox myViewModel;
+        #endregion
 
+        #region constructor
         public MainWindow()
         {
             InitializeComponent();
             myViewModel = new Toolbox();
             this.DataContext = myViewModel;          
         }
+        #endregion
 
+        #region Button Clicks
         private void Backup_Click(object sender, RoutedEventArgs e)
         {
             myViewModel.Backup();
@@ -52,5 +57,6 @@ namespace DCSBackupTool
             Settings mySet = new Settings();
             mySet.Show();
         }
+        #endregion
     }
 }
