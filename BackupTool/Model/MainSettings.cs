@@ -22,6 +22,9 @@ using Microsoft.Win32;
 
 namespace DCSBackupTool.Model
 {
+    /// <summary>
+    /// Class to retrieve the main setting upon initialisation. 
+    /// </summary>
     class MainSettings
     {
         private RegistryKey baseRegistryKey = Registry.CurrentUser;
