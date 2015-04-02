@@ -1,32 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Documents;
-using System.Threading;
-using System.IO;
-using Microsoft.Win32;
+﻿//  Copyright 2015 Simon Collier
+//    
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DCSBackupTool
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+using System.Threading;
+using Microsoft.Win32;
+using DCSBackupTool.ViewModel;
+
+namespace DCSBackupTool.Model
 {
-    public partial class MainWindow : Window
+    class FolderCopier
     {
-        private string dCSBackupToolSubKey = "SOFTWARE\\DCSBackupTool\\Settings";
         private RegistryKey baseRegistryKey = Registry.CurrentUser;
 
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-
-        private void Backup_Click(object sender, RoutedEventArgs e)
-        {
-            Thread trd = new Thread(new ThreadStart(ThreadBackupFolders));
-            trd.IsBackground = true;
-            trd.Start();
-        }
-
-        private void ThreadBackupFolders()
+        public void BackupDCS()
         {
             //start time
             string backupLocations = null;
@@ -38,19 +41,19 @@ namespace DCSBackupTool
             try
             {
                 string backupPath = RegistryManipulator.ReadRegistry(this.baseRegistryKey,
-                        this.dCSBackupToolSubKey, "BackupPath");
+                        MainSettings.dCSBackupToolSubKey, "BackupPath");
 
                 if (!Directory.Exists(backupPath))
                 {
                     SetProgressBar(false);
-                    throw new ApplicationException("Backup location " + backupPath + " does not exist");
+                    throw new ApplicationException("Backup location " + backupPath + " not found");
                 }
 
                 List<string> foldersToBackup = new List<string>();
-                foldersToBackup.Add(RegistryManipulator.ReadRegistry(baseRegistryKey, dCSBackupToolSubKey, "SavedGames"));
-                foldersToBackup.Add(RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "DCS World"));
-                foldersToBackup.Add(RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "Helios"));
-                foldersToBackup.Add(RegistryManipulator.ReadRegistry(this.baseRegistryKey, this.dCSBackupToolSubKey, "Jsgme"));
+                foldersToBackup.Add(RegistryManipulator.ReadRegistry(baseRegistryKey, MainSettings.dCSBackupToolSubKey, "SavedGames"));
+                foldersToBackup.Add(RegistryManipulator.ReadRegistry(this.baseRegistryKey, MainSettings.dCSBackupToolSubKey, "DCS World"));
+                foldersToBackup.Add(RegistryManipulator.ReadRegistry(this.baseRegistryKey, MainSettings.dCSBackupToolSubKey, "Helios"));
+                foldersToBackup.Add(RegistryManipulator.ReadRegistry(this.baseRegistryKey, MainSettings.dCSBackupToolSubKey, "Jsgme"));
 
                 foreach (string fol in foldersToBackup)
                 {
@@ -70,11 +73,11 @@ namespace DCSBackupTool
                                 //the Delete method may not be able to delete it
                                 Directory.Delete(backupLocations, true);
                                 textOut.Append(backupLocations + " deleted\n");
-                                WriteToTextBlock(textOut.ToString());
+                                SetCopyText(textOut.ToString());
                             }
                             CopyDirectory(fol, backupLocations, true);
                             textOut.Append(fol + " backed up\n");
-                            WriteToTextBlock(textOut.ToString());
+                            SetCopyText(textOut.ToString());
                         }
                         else
                         {
@@ -89,11 +92,11 @@ namespace DCSBackupTool
                 int result2 = Environment.TickCount & Int32.MaxValue;
                 string timeTaken = ((result2 - result) / 1000).ToString();
                 textOut.Append("Copy took " + timeTaken + " seconds");
-                WriteToTextBlock(textOut.ToString());
+                SetCopyText(textOut.ToString());
             }
             catch (Exception oError)
             {
-                WriteToTextBlock(oError.Message);
+                SetCopyText(oError.Message);
             }
         }
 
@@ -138,27 +141,41 @@ namespace DCSBackupTool
             return ret;
         }
 
-        private void Exit_Click(object sender, RoutedEventArgs e)
+        #region Raise our events when required
+        public void SetCopyText(string text)
         {
-            Environment.Exit(0);
-        }
-
-        private void Options_Click(object sender, RoutedEventArgs e)
-        {
-            Settings mySet = new Settings();
-            mySet.Show();
-        }
-
-        private void WriteToTextBlock(string text)
-        {
-            System.Windows.Application.Current.Dispatcher.BeginInvoke(
-                new Action(() => this.outputTextblock.Text = text));
+            OnRaiseCopyEvent(new CustomStringEventArgs(text));
         }
 
         private void SetProgressBar(bool b)
         {
-            System.Windows.Application.Current.Dispatcher.BeginInvoke(
-               new Action(() => this.pbStatus.IsIndeterminate = b));
+            OnRaiseProgressEvent(new CustomBoolEventArgs(b));
         }
+        #endregion
+
+        #region events to publish
+        public event EventHandler<CustomStringEventArgs> RaiseCopyEvent;
+
+        protected virtual void OnRaiseCopyEvent(CustomStringEventArgs e)
+        {
+            EventHandler<CustomStringEventArgs> handler = RaiseCopyEvent;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<CustomBoolEventArgs> RaiseProgressEvent;
+
+        protected virtual void OnRaiseProgressEvent(CustomBoolEventArgs e)
+        {
+            EventHandler<CustomBoolEventArgs> handler = RaiseProgressEvent;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+        #endregion
+
     }
 }
